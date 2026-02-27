@@ -6,6 +6,8 @@
 
 We initially had some minor issues with mapping out the response from /api/jobs in JobListings.jsx. It initially stumped us, until we remembered to change some configuration settings. Overall developing Frontend was easy.
 
+There were issues with getting the conditional rendering of ui to work due to props not being passed correctly
+
 While creating authentication routes for App.jsx, our first solution to getting the user token was something along these lines:
 
 ```javascript
@@ -77,7 +79,7 @@ const getJobById = async (req, res) => {
 
 **Lessons Learned:**
 
-1. Check your configuration settings and make sure routes are accessible before launching into a debugging spree.
+1. Using props correctly
 2. Check variables names
 3. 
 
