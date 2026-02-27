@@ -23,7 +23,7 @@ However after reviewing some past tasks, we changed it to this.
     });
 ```
 
-##### Backedend:
+##### Backednd:
 There was issue in the jobController with ID
 ```javascript
 const getJobById = async (req, res) => {
