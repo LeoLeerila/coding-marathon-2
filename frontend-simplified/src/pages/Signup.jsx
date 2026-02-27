@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function Signup() {
+export default function Signup({setIsAuthenticated}) {
     const navigate = useNavigate();
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -41,6 +41,7 @@ export default function Signup() {
         }
         localStorage.setItem("user", JSON.stringify(user));
         console.log("User signed up!");
+        setIsAuthenticated(true);
         navigate("/");
     }
     return (

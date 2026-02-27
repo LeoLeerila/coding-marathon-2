@@ -23,14 +23,14 @@ const createJob = async (req, res) => {
 };
 
 const getJobById = async (req, res) => {
-    const {jobsId} = req.params;
+    const {jobId} = req.params;
 
-    if(!mongoose.Types.ObjectId.isValid(jobsId)) {
+    if(!mongoose.Types.ObjectId.isValid(jobId)) {
         return res.status(400).json({ message : "Invalid jobs ID"});
     };
 
     try {
-        const job = await Job.findById(jobsId);
+        const job = await Job.findById(jobId);
         if(job){
             res.status(200).json(job);
         }else {
