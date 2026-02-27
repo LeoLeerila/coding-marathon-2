@@ -18,23 +18,44 @@ export default function Signup() {
             alert("Please fill in all fields");
             return;
         }
-        const userData = {
-            name,
-            email,
-            password,
-            phoneNumber,
-            gender,
-            address: {
-                street,
-                city,
-                zipCode
+        const res = await fetch("/api/users/signup", {
+            method: "POST",
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify({
+                name,
+                email,
+                password,
+                phoneNumber,
+                gender,
+                address: {
+                    street,
+                    city,
+                    zipCode
+                }
+            })
+        })
+        const a = {
+                name,
+                email,
+                password,
+                phoneNumber,
+                gender,
+                address: {
+                    street,
+                    city,
+                    zipCode
+                }
             }
-        };
-        localStorage.setItem("user", userData);
-        console.log("User signed up:", userData);
+            console.log(a)
+        const user = await res.json();
+        if(!res.ok) {
+            console.log("nu uh")
+            return
+        }
+        localStorage.setItem("user", user);
+        console.log("User signed up!");
         navigate("/");
     }
-
     return (
         <div className="create">
             <h2 className="text-3xl text-center font-semibold mb-6">Signup</h2>
@@ -46,7 +67,7 @@ export default function Signup() {
                 <label className="block text-gray-700 font-bold mb-2">Password:</label>
                 <input className="border rounded py-2 px-3" type="password" required value={password} onChange={(e) => setPassword(e.target.value)} />
                 <label className="block text-gray-700 font-bold mb-2">Phone number:</label>
-                <input className="border rounded py-2 px-3" type="tel" required value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
+                <input className="border rounded py-2 px-3" type="text" required value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
                 <label className="block text-gray-700 font-bold mb-2">Gender:</label>
                 <input className="border rounded py-2 px-3" type="text" required value={gender} onChange={(e) => setGender(e.target.value)} />
                 <label className="block text-gray-700 font-bold mb-2">Street:</label>
