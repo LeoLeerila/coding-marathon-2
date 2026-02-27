@@ -17,44 +17,47 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 
 const App = () => {
-  const [isAuthentintaced, setIsAuthenticated] = useState(() => {
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     return user && user.token ? true : false;
   });
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<MainLayout />}>
+      <Route path="/" element={<MainLayout
+          isAuthenticated={isAuthenticated}
+          setIsAuthenticated={setIsAuthenticated}
+        />}>
         <Route index element={<HomePage />} />
         <Route
           path="/login"
-          element={!isAuthentintaced
+          element={!isAuthenticated
             ? <Login setIsAuthenticated={setIsAuthenticated} />
             : <Navigate to="/" />
           } />
         <Route
           path="/signup"
-          element={!isAuthentintaced
+          element={!isAuthenticated
             ? <Signup setIsAuthenticated={setIsAuthenticated} />
             : <Navigate to="/" />
           } />
         <Route path="/jobs" element={<JobsPage />} />
         <Route
           path="/add-job"
-          element={!isAuthentintaced
+          element={!isAuthenticated
             ? <Navigate to="/login" />
             : <AddJobPage />
           }
         />
         <Route
           path="/edit-job/:id"
-          element={!isAuthentintaced
+          element={!isAuthenticated
             ? <Navigate to="/signup" />
             : <EditJobPage />
           }
         />
         <Route
           path="/jobs/:id"
-          element={!isAuthentintaced
+          element={!isAuthenticated
             ? <Navigate to="/signup" />
             : <JobPage />
           } />

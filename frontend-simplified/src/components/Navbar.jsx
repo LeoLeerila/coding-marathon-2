@@ -1,7 +1,12 @@
 import { NavLink } from 'react-router-dom';
 import logo from '../assets/images/logo.png';
 
-const Navbar = () => {
+const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
+  const handleClick = () => {
+    localStorage.removeItem("user");
+    setIsAuthenticated(false);
+  };
+
   const linkClass = ({ isActive }) =>
     isActive
       ? 'bg-black text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2'
@@ -29,12 +34,21 @@ const Navbar = () => {
                 <NavLink to='/add-job' className={linkClass}>
                   Add Job
                 </NavLink>
+              {!isAuthenticated && (
+              <div>
                 <NavLink to='/signup' className={linkClass}>
                   Sign up
                 </NavLink>
                 <NavLink to='/login' className={linkClass}>
                   Login
                 </NavLink>
+                </div>
+              )}
+              {isAuthenticated && (
+                <button onClick={handleClick} className='text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2'>
+                  Logout
+                </button>
+              )}  
               </div>
             </div>
           </div>
