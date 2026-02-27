@@ -70,6 +70,8 @@ const getJobById = async (req, res) => {
 }
 ```
 
+we had no trouble getting authentication working in the backend
+
 ### Key Improvements:
 
 - Code is clean
