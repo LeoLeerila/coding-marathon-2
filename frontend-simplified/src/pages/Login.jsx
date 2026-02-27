@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+//const Login = ({setIsAuthenticated})
 const Login = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
@@ -8,13 +9,18 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const logged = [
-            email,
-            password
-        ]
-        //async fetch..
-        //res.json
-        localStorage.setItem("user", logged);
+        const res = await fetch("/api/users/login", {
+            method: "POST",
+            headers: {"Content-type": "application/json"},
+            body: JSON.stringify({email, password})
+        })
+        const user = await res.json();
+        if(!res.ok) {
+            console.log("Error!!!")
+            return
+        }
+        localStorage.setItem("user", JSON.stringify(user));
+        //setIsAuthenticated(true)
         console.log("Logged in")
         navigate("/");
     }

@@ -23,6 +23,8 @@ const JobListings = ({ isHome = false }) => {
     fetchJobs();
   }, []);
 
+  console.log(setJobs)
+
 
   return (
     <section className='bg-blue-50 px-4 py-10'>
@@ -34,11 +36,13 @@ const JobListings = ({ isHome = false }) => {
         {loading ? (
           <Spinner loading={loading} />
         ) : (
-          <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {jobs.length === 0 ? (
-              <p>No jobs available....</p>
-            ): (
-              jobs.map((job) => (<JobListing key={job.id} job={job} /> ))
+              <p>No jobs found...</p>
+            ) : (
+              jobs.map((job) => (
+                <JobListing key={job.id} job={job} />
+              ))
             )}
           </div>
         )}
@@ -46,6 +50,6 @@ const JobListings = ({ isHome = false }) => {
     </section>
   );
 
-  
+
 };
 export default JobListings;
