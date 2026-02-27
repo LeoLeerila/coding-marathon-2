@@ -3,7 +3,10 @@ const mongoose = require("mongoose");
 
 const getAllJob = async(req, res) => {
     try {
-        const jobs = await Job.find({}).sort({ createdAt: -1});
+        const limit = parseInt(req.query._limit);
+        const jobs = limit 
+        ? await Job.find({}).sort({ createdAt: -1 }).limit(limit)
+        : await Job.find({}).sort({ createdAt: -1 });
         res.status(200).json(jobs);
     }catch(error){
         res.status(500).json({ message:"Failde retrieve"});
