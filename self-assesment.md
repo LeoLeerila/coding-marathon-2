@@ -23,6 +23,50 @@ However after reviewing some past tasks, we changed it to this.
     });
 ```
 
+##### Backedend:
+There was issue in the jobController with ID
+```javascript
+const getJobById = async (req, res) => {
+    const {jobsId} = req.params;
+
+    if(!mongoose.Types.ObjectId.isValid(jobsId)) {
+        return res.status(400).json({ message : "Invalid jobs ID"});
+    };
+
+    try {
+        const job = await Job.findById(jobsId);
+        if(job){
+            res.status(200).json(job);
+        }else {
+      res.status(404).json({ message: "Jobs not found" });
+    }
+    }catch (error) {
+    res.status(500).json({ message: "Failed to retrieve jobs" });
+  } 
+}
+```
+#### Solution:
+Rename jobsId => jobId
+```javascript
+const getJobById = async (req, res) => {
+    const {jobId} = req.params;
+
+    if(!mongoose.Types.ObjectId.isValid(jobId)) {
+        return res.status(400).json({ message : "Invalid jobs ID"});
+    };
+
+    try {
+        const job = await Job.findById(jobId);
+        if(job){
+            res.status(200).json(job);
+        }else {
+      res.status(404).json({ message: "Jobs not found" });
+    }
+    }catch (error) {
+    res.status(500).json({ message: "Failed to retrieve jobs" });
+  } 
+}
+```
 
 ### Key Improvements:
 
@@ -34,7 +78,8 @@ However after reviewing some past tasks, we changed it to this.
 **Lessons Learned:**
 
 1. Check your configuration settings and make sure routes are accessible before launching into a debugging spree.
-2. 
+2. Check variables names
+3. 
 
 
 ```js
