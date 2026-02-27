@@ -25,7 +25,7 @@ export default function Signup() {
                 name,
                 email,
                 password,
-                phoneNumber,
+                phone_number: phoneNumber,
                 gender,
                 address: {
                     street,
@@ -34,25 +34,12 @@ export default function Signup() {
                 }
             })
         })
-        const a = {
-                name,
-                email,
-                password,
-                phoneNumber,
-                gender,
-                address: {
-                    street,
-                    city,
-                    zipCode
-                }
-            }
-            console.log(a)
         const user = await res.json();
         if(!res.ok) {
             console.log("nu uh")
             return
         }
-        localStorage.setItem("user", user);
+        localStorage.setItem("user", JSON.stringify(user));
         console.log("User signed up!");
         navigate("/");
     }
